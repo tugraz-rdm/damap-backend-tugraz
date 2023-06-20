@@ -1,0 +1,8 @@
+*
+!src/**/*
+!lib/**
+!pom.xml
+!damap-backend-2.3.0.jar
+!target/*-runner
+!target/*-runner.jar
+!target/lib/*
