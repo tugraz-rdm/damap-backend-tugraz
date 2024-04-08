@@ -2,8 +2,21 @@ name: test
 
 on:
   push:
+    branches:
+      - main
+      - prod
+      - test
   pull_request:
+    branches:
+      - main
+      - prod
+      - test
   workflow_dispatch:
+    inputs:
+      reason:
+        description: "Reason"
+        required: false
+        default: "Manual trigger"
 
 jobs:
   maven-build-test:
