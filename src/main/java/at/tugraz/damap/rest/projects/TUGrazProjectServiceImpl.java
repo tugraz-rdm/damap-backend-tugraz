@@ -51,6 +51,7 @@ public class TUGrazProjectServiceImpl implements ProjectService {
 
     @Override
     public List<ContributorDO> getProjectStaff(String projectId) {
+        // Info not available within current project API.
         return List.of();
     }
 
