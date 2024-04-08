@@ -1,5 +1,0 @@
-databaseChangeLog:
-  - include:
-      file: db/changeLog.yaml # changelog from base damap-backend
-  - include:
-      file: db/tugraz/addInstitutionalStorage.sql # insert TU Graz specific storage
