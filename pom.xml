@@ -5,21 +5,23 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>at.tugraz</groupId>
-  <artifactId>damap-tugraz-be</artifactId>
-  <version>2.5.0</version>
+  <artifactId>damap-be-tugraz</artifactId>
+  <version>3.0.1</version>
+
   <properties>
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
-    <maven.compiler.target>11</maven.compiler.target>
-    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.compiler.parameters>true</maven.compiler.parameters>
-    <compiler-plugin.version>3.8.1</compiler-plugin.version>
+    <compiler-plugin.version>3.11.0</compiler-plugin.version>
     <quarkus.platform.artifact-id>quarkus-universe-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
     <quarkus.platform.version>2.16.2.Final</quarkus.platform.version>
   </properties>
 
+  <!-- TODO: remove when damap-backend base image is available via maven -->
   <repositories>
     <repository>
       <id>local-repo</id>
@@ -45,9 +47,9 @@
       <groupId>at.ac.tuwien</groupId>
       <artifactId>damap-backend</artifactId>
       <type>jar</type>
-      <version>2.5.0</version>
+      <version>3.0.1</version>
     </dependency>
- <!-- Test -->
+    <!-- Test -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-jacoco</artifactId>
@@ -135,8 +137,8 @@
       <artifactId>quarkus-jdbc-postgresql</artifactId>
     </dependency>
     <dependency>
-        <groupId>io.quarkus</groupId>
-        <artifactId>quarkus-jdbc-oracle</artifactId>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-jdbc-oracle</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -149,8 +151,8 @@
     </dependency>
     <!-- Health -->
     <dependency>
-        <groupId>io.quarkus</groupId>
-        <artifactId>quarkus-smallrye-health</artifactId>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-health</artifactId>
     </dependency>
     <!-- Utility -->
     <dependency>
@@ -175,8 +177,8 @@
       <version>4.1.2</version>
     </dependency>
     <dependency>
-        <groupId>io.quarkus</groupId>
-        <artifactId>quarkus-config-yaml</artifactId>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-config-yaml</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>

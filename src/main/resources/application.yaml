@@ -5,10 +5,10 @@ damap:
   origins: http://localhost:8085 # https://your.frontend.com,https://*.yourdomain.com
   auth:
     backend:
-      url: http://keycloak:8080/auth/realms/damap # https://your.authentication.server
+      url: http://keycloak:8080/realms/damap # https://your.authentication.server
       client: 'damap-be' # your-backend-authentication-client-id
     frontend:
-      url: http://localhost:8087/auth/realms/damap # usually the same as the backend url
+      url: http://localhost:8087/realms/damap # usually the same as the backend url
       client: 'damap' # your-frontend-authentication-client-id
     scope: 'openid profile email offline_access microprofile-jwt roles personID' # your-backend-authentication-scope, including your variable for your user IDs
     user: 'personID' # the variable name for your user IDs
@@ -16,7 +16,9 @@ damap:
     url: jdbc:postgresql://damap-db:5432/damap # jdbc:your-datasource-language:your-datasource.address
     username: damap # your-datasource-username
     password: pw4damap # your-datasource-password
+    db-kind: postgresql # your database
   repositories:
+    # TU Graz repository
     recommendation: [ 'r3d100013565' ]
   projects-url: http://api-mock:80
   persons-url: http://api-mock:80
@@ -28,10 +30,8 @@ damap:
     - display-text: 'ORCID'
       query-value: 'ORCID'
       class-name: 'at.ac.tuwien.damap.rest.persons.orcid.ORCIDPersonServiceImpl'
-
   tugraz:
     api:
-      url: https://api-demo.tugraz.at
       auth:
         url: https://auth-demo.tugraz.at/auth/realms/tugraz-vpu/protocol/openid-connect/token
         client: 'client'
@@ -45,6 +45,9 @@ quarkus:
       origins: ${damap.origins}
       headers: origin,content-type,accept,authorization
       access-control-max-age: 1
+    # needed for the fits service. Specify how large a single file for upload may be.
+    limits:
+      max-body-size: 100M
 
   oidc:
     auth-server-url: ${damap.auth.backend.url}
@@ -55,7 +58,7 @@ quarkus:
   datasource:
     jdbc:
       url: ${damap.datasource.url}
-    db-kind: postgresql
+    db-kind: ${damap.datasource.db-kind}
     username: ${damap.datasource.username}
     password: ${damap.datasource.password}
 
@@ -73,7 +76,7 @@ quarkus:
 
   liquibase:
     migrate-at-start: true
-    change-log: db/tugraz/mainChangeLog.yaml
+    change-log: at/tugraz/damap/db/mainChangeLog.yaml
 
 rest:
   projects/mp-rest/url: ${damap.projects-url}
@@ -83,18 +86,25 @@ rest:
     repositories/mp-rest/url: https://www.re3data.org/api
     repositories/mp-rest/scope: javax.inject.Singleton
   openaire/mp-rest/url: http://api.openaire.eu/search/
+  orcid:
+    search/mp-rest/url: https://pub.orcid.org
   tugraz:
-    api/mp-rest/url: ${damap.tugraz.api.url}
     api:
       auth/mp-rest/url: ${damap.tugraz.api.auth.url}
 
 "%dev":
   damap:
     origins: http://localhost:4200
+    auth:
+      backend:
+        url: http://localhost:8087/realms/damap # https://your.authentication.server
     datasource:
-      url: jdbc:postgresql://localhost:5432/damap
+      url: jdbc:postgresql://localhost:8088/damap
       username: damap
       password: pw4damap
+    projects-url: http://localhost:8091
+    persons-url: http://localhost:8091
+    fits-url: http://localhost:8089/fits
 
 "%oracle":
   quarkus:
@@ -113,7 +123,7 @@ rest:
 "%test":
   damap:
     repositories:
-      recommendation: ['r3d100013557'] # Re3Data id(s)
+      recommendation: ['r3d100010468'] # Re3Data id(s)
   quarkus:
     datasource:
       db-kind: h2
