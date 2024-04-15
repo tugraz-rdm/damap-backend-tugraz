@@ -8,7 +8,7 @@ FROM maven:3.9.5-eclipse-temurin-17-alpine AS builder
 LABEL maintainer="rdmteam@tugraz.at" \
         org.label-schema.name="DAMAP-backend" \
         org.label-schema.description="DAMAP is a tool that aims to facilitate the creation of data management plans (DMPs) for researchers." \
-        org.label-schema.usage="https://github.com/tugraz-rdm/damap-backend-tugraz/tree/main/doc" \
+        org.label-schema.usage="https://github.com/tugraz-rdm/damap-backend-tugraz/tree/main/README.md" \
         org.label-schema.vendor="Graz University of Technology" \
         org.label-schema.url="https://github.com/tugraz-rdm/damap-backend-tugraz" \
         org.label-schema.vcs-url="https://github.com/tugraz-rdm/damap-backend-tugraz" \
