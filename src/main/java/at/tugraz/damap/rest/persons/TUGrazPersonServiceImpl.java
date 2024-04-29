@@ -14,6 +14,7 @@ import at.ac.tuwien.damap.rest.base.Search;
 import at.ac.tuwien.damap.rest.dmp.domain.ContributorDO;
 import at.ac.tuwien.damap.rest.persons.PersonService;
 import at.tugraz.blueprint.rest.auth.CredentialsService;
+import at.tugraz.blueprint.rest.models.SearchResult;
 import at.tugraz.damap.rest.dmp.domain.TUGrazPerson;
 import at.tugraz.damap.rest.dmp.mapper.TUGrazPersonDOMapper;
 import lombok.extern.jbosslog.JBossLog;
@@ -47,20 +48,20 @@ public class TUGrazPersonServiceImpl implements PersonService {
     @Override
     public ResultList<ContributorDO> search(MultivaluedMap<String, String> queryParams) {
         Search s = Search.fromMap(queryParams);
-        List<TUGrazPerson> tuGrazPersons = List.of();
+        SearchResult<TUGrazPerson> tuGrazPeopleSearch = new SearchResult<>();
 
         // We first try to get local attributes. If a field does not exist or we do
         // not have permission to access it, this will throw. So we try again without
         // fetching locals.
         try {
-            tuGrazPersons = tuGrazPersonRestService.search(s.getQuery(), s.getPagination().getPage(),
+            tuGrazPeopleSearch = tuGrazPersonRestService.search(s.getQuery(), s.getPagination().getPage(),
                     s.getPagination().getPerPage(), List.of("email"));
         } catch (Exception e) {
-            tuGrazPersons = tuGrazPersonRestService.search(s.getQuery(), s.getPagination().getPage(),
+            tuGrazPeopleSearch = tuGrazPersonRestService.search(s.getQuery(), s.getPagination().getPage(),
                     s.getPagination().getPerPage(), List.of());
         }
 
-        List<ContributorDO> contributors = tuGrazPersons.stream()
+        List<ContributorDO> contributors = tuGrazPeopleSearch.getItems().stream()
                 .map(c -> TUGrazPersonDOMapper.mapEntityToDO(c, new ContributorDO()))
                 .collect(Collectors.toList());
 

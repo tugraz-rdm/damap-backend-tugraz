@@ -36,10 +36,11 @@ public class TUGrazProjectServiceImpl implements ProjectService {
         Search s = Search.fromMap(queryParams);
         List<ProjectDO> projects = List.of();
         try {
-            var tuGrazProjects = tuGrazProjectRestService.search(s.getQuery(), s.getPagination().getPage(),
+            var tuGrazProjectSearch = tuGrazProjectRestService.search(s.getQuery(), s.getPagination().getPage(),
                     s.getPagination().getPerPage(), null);
 
-            projects = tuGrazProjects.stream().map(p -> TUGrazProjectDOMapper.mapEntityToDO(p, new ProjectDO()))
+            projects = tuGrazProjectSearch.getItems().stream()
+                    .map(p -> TUGrazProjectDOMapper.mapEntityToDO(p, new ProjectDO()))
                     .collect(Collectors.toList());
 
         } catch (Exception e) {
