@@ -1,27 +1,25 @@
 package at.tugraz.blueprint.rest.auth;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.ws.rs.core.MultivaluedHashMap;
-import javax.ws.rs.core.MultivaluedMap;
-
-import org.eclipse.microprofile.rest.client.ext.ClientHeadersFactory;
-
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.core.MultivaluedHashMap;
+import jakarta.ws.rs.core.MultivaluedMap;
 import lombok.extern.jbosslog.JBossLog;
+import org.eclipse.microprofile.rest.client.ext.ClientHeadersFactory;
 
 @JBossLog
 @ApplicationScoped
 public class BearerTokenClientHeadersFactory implements ClientHeadersFactory {
 
-    @Inject
-    CredentialsService credentialsService;
+  @Inject CredentialsService credentialsService;
 
-    @Override
-    public MultivaluedMap<String, String> update(MultivaluedMap<String, String> incomingHeaders,
-            MultivaluedMap<String, String> clientOutgoingHeaders) {
-        MultivaluedMap<String, String> result = new MultivaluedHashMap<>();
-        String token = credentialsService.getToken();
-        result.add("Authorization", "Bearer " + token);
-        return result;
-    }
+  @Override
+  public MultivaluedMap<String, String> update(
+      MultivaluedMap<String, String> incomingHeaders,
+      MultivaluedMap<String, String> clientOutgoingHeaders) {
+    MultivaluedMap<String, String> result = new MultivaluedHashMap<>();
+    String token = credentialsService.getToken();
+    result.add("Authorization", "Bearer " + token);
+    return result;
+  }
 }

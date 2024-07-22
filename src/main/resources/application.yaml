@@ -6,12 +6,12 @@ damap:
   auth:
     backend:
       url: http://keycloak:8080/realms/damap # https://your.authentication.server
-      client: 'damap-be' # your-backend-authentication-client-id
+      client: "damap-be" # your-backend-authentication-client-id
     frontend:
       url: http://localhost:8087/realms/damap # usually the same as the backend url
-      client: 'damap' # your-frontend-authentication-client-id
-    scope: 'openid profile email offline_access microprofile-jwt roles personID' # your-backend-authentication-scope, including your variable for your user IDs
-    user: 'personID' # the variable name for your user IDs
+      client: "damap" # your-frontend-authentication-client-id
+    scope: "openid profile email offline_access microprofile-jwt roles personID" # your-backend-authentication-scope, including your variable for your user IDs
+    user: "personID" # the variable name for your user IDs
   datasource:
     url: jdbc:postgresql://damap-db:5432/damap # jdbc:your-datasource-language:your-datasource.address
     username: damap # your-datasource-username
@@ -19,26 +19,29 @@ damap:
     db-kind: postgresql # your database
   repositories:
     # TU Graz repository
-    recommendation: [ 'r3d100013565' ]
-  projects-url: http://api-mock:80
-  persons-url: http://api-mock:80
-  fits-url: http://your.fits.service:1234
+    recommendation: ["r3d100013565"]
+  projects-url: https://api.tugraz.at/base/research-projects
+  persons-url: https://api.tugraz.at/base/people
+  fits-url: http://fits-service:8080/fits
   person-services:
-    - display-text: 'University'
-      query-value: 'UNIVERSITY'
-      class-name: 'at.tugraz.damap.rest.persons.TUGrazPersonServiceImpl'
-    - display-text: 'ORCID'
-      query-value: 'ORCID'
-      class-name: 'at.ac.tuwien.damap.rest.persons.orcid.ORCIDPersonServiceImpl'
+    - display-text: "University"
+      query-value: "UNIVERSITY"
+      class-name: "at.tugraz.damap.rest.persons.TUGrazPersonServiceImpl"
+    - display-text: "ORCID"
+      query-value: "ORCID"
+      class-name: "org.damap.base.rest.persons.orcid.ORCIDPersonServiceImpl"
   tugraz:
     api:
       auth:
         url: https://auth-demo.tugraz.at/auth/realms/tugraz-vpu/protocol/openid-connect/token
-        client: 'client'
-        secret: 'secret'
-        
+        client: "client"
+        secret: "secret"
+
 # general config settings
 quarkus:
+  # index base package which will register the beans and make endpoint resources available.
+  # Can be removed if solved in base package
+
   http:
     cors:
       ~: true
@@ -78,13 +81,20 @@ quarkus:
     migrate-at-start: true
     change-log: at/tugraz/damap/db/mainChangeLog.yaml
 
+  smallrye-openapi:
+    info-title: DAMAP API
+
+  swagger-ui:
+    always-include: true # set to false if swagger-ui should only be available in dev mode
+    oauth-client-id: ${damap.auth.frontend.client}
+
 rest:
   projects/mp-rest/url: ${damap.projects-url}
   persons/mp-rest/url: ${damap.persons-url}
   fits/mp-rest/url: ${damap.fits-url}
   r3data:
     repositories/mp-rest/url: https://www.re3data.org/api
-    repositories/mp-rest/scope: javax.inject.Singleton
+    repositories/mp-rest/scope: jakarta.inject.Singleton
   openaire/mp-rest/url: http://api.openaire.eu/search/
   orcid:
     search/mp-rest/url: https://pub.orcid.org
@@ -111,7 +121,7 @@ rest:
     datasource:
       db-kind: oracle
     hibernate-orm:
-      dialect: org.hibernate.dialect.Oracle12cDialect
+      dialect: org.hibernate.dialect.OraclecDialect
 
 "%postgres":
   quarkus:
@@ -123,7 +133,7 @@ rest:
 "%test":
   damap:
     repositories:
-      recommendation: ['r3d100010468'] # Re3Data id(s)
+      recommendation: ["r3d100010468"] # Re3Data id(s)
   quarkus:
     datasource:
       db-kind: h2
