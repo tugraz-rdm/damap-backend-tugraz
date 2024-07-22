@@ -1,5 +1,5 @@
 databaseChangeLog:
   - include:
-      file: at/ac/tuwien/damap/db/changeLog-root.yaml # changelog from base damap-backend
+      file: org/damap/base/db/changeLog-root.yaml # changelog from base damap-backend
   - include:
       file: at/tugraz/damap/db/addInstitutionalStorage.yaml # insert TU Graz specific storage
