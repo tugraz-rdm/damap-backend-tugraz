@@ -8,55 +8,29 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 
 ## Running the application in dev mode
 
-You can run your application in dev mode that enables live coding using:
-```shell script
-./mvnw compile quarkus:dev
+You can run the application in dev mode, with live coding enabled, using the following command:
+```shell
+mvn compile quarkus:dev
 ```
+> **_NOTE:_** Quarkus now ships with a Dev UI, accessible in dev mode only at http://localhost:8080/q/dev/.
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+## Adaptation for TUGraz DMP Tool
 
-## Packaging and running the application
+This project is based on the DAMAP backend developed in cooperation between TU Wien and TU Graz, but has been adapted to meet the specific needs of the TUGraz DMP Tool. This adaptation focuses on institutional integration, allowing researchers to manage their Data Management Plans (DMPs) efficiently, leveraging existing systems at the institution.
 
-The application can be packaged using:
-```shell script
-./mvnw package
-```
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+## Installation
 
-If you want to build an _über-jar_, execute the following command:
-```shell script
-./mvnw package -Dquarkus.package.type=uber-jar
-```
+DAMAP can be deployed using several methods. The recommended approach is running DAMAP as containers. Detailed installation instructions can be found in the [INSTALLATION.md](INSTALLATION.md) file.
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
+## Customisation
 
-## Creating a native executable
+For institutional integration, customisation details are available in the [CUSTOMISING.md](CUSTOMISING.md) file.
 
-You can create a native executable using: 
-```shell script
-./mvnw package -Pnative
-```
+## Authors
+* [David Eckhard](https://github.com/rekt-hard)
+* [Laura Thaci](https://github.com/lpandath)
+* [Mojib Wali](https://github.com/mb-wali)
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
-```shell script
-./mvnw package -Pnative -Dquarkus.native.container-build=true
-```
 
-You can then execute your native executable with: `./target/dmap-tugraz-be-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.html.
-
-## Related Guides
-
-- YAML Configuration ([guide](https://quarkus.io/guides/config#yaml)): Use YAML to configure your Quarkus application
-
-## Provided Code
-
-### YAML Config
-
-Configure your application with YAML
-
-[Related guide section...](https://quarkus.io/guides/config-reference#configuration-examples)
-
-The Quarkus application configuration is located in `src/main/resources/application.yml`.
+## Screenshots
+![DMP-Tool-TUGraz](https://github.com/user-attachments/assets/81922d01-f12f-46b2-9a39-2f4941592d32)
