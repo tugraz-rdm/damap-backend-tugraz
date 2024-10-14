@@ -37,6 +37,10 @@ damap:
         client: "client"
         secret: "secret"
 
+invenio:
+  disabled: true
+  shared-secret: "thisIsAVerySecretKeyOfAtLeast32Chars"
+
 # general config settings
 quarkus:
   # index base package which will register the beans and make endpoint resources available.
@@ -50,7 +54,7 @@ quarkus:
       access-control-max-age: 1
     # needed for the fits service. Specify how large a single file for upload may be.
     limits:
-      max-body-size: 100M
+      max-body-size: 10M
 
   oidc:
     auth-server-url: ${damap.auth.backend.url}

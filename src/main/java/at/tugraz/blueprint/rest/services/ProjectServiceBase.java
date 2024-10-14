@@ -1,6 +1,7 @@
 package at.tugraz.blueprint.rest.services;
 
 import at.tugraz.blueprint.rest.models.SearchResult;
+import at.tugraz.damap.rest.dmp.domain.TUGrazProject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
@@ -8,12 +9,12 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 
 @Produces("application/ld+json")
-public interface DBPServiceBase<T> {
-  // Base class for digital blueprint api
+public interface ProjectServiceBase {
+
   @GET
   @Path("")
   @Produces("application/ld+json")
-  SearchResult<T> search(
+  SearchResult<TUGrazProject> search(
       @QueryParam("search") String searchQuery,
       @QueryParam("page") int page,
       @QueryParam("perPage") int resultsPerPage,
@@ -22,5 +23,6 @@ public interface DBPServiceBase<T> {
   @GET
   @Path("/{id}")
   @Produces("application/ld+json")
-  T read(@PathParam("id") String id, @QueryParam("includeLocal") Iterable<String> localAttributes);
+  TUGrazProject read(
+      @PathParam("id") String id, @QueryParam("includeLocal") Iterable<String> localAttributes);
 }
