@@ -53,7 +53,7 @@ public class TUGrazProjectServiceImpl implements ProjectService {
 
   @Override
   public ProjectDO read(String id, MultivaluedMap<String, String> queryParams) {
-    var project = tuGrazProjectRestService.read(id, List.of());
+    var project = tuGrazProjectRestService.read(id, null);
     return TUGrazProjectDOMapper.mapEntityToDO(project, new ProjectDO());
   }
 
