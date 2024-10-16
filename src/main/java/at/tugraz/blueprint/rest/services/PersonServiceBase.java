@@ -12,17 +12,19 @@ import jakarta.ws.rs.QueryParam;
 public interface PersonServiceBase {
 
   @GET
-  @Path("")
   @Produces("application/ld+json")
   SearchResult<TUGrazPerson> search(
       @QueryParam("search") String searchQuery,
       @QueryParam("page") int page,
       @QueryParam("perPage") int resultsPerPage,
-      @QueryParam("includeLocal") Iterable<String> localAttributes);
+      // includeLocal must be a comma separated list of additional attributes from TU Graz API (e.g.
+      // "email,organization")
+      @QueryParam("includeLocal") String localAttributes);
 
   @GET
   @Path("/{id}")
   @Produces("application/ld+json")
-  TUGrazPerson read(
-      @PathParam("id") String id, @QueryParam("includeLocal") Iterable<String> localAttributes);
+  // includeLocal must be a comma separated list of additional attributes from TU Graz API (e.g.
+  // "email,organization")
+  TUGrazPerson read(@PathParam("id") String id, @QueryParam("includeLocal") String localAttributes);
 }

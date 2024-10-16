@@ -31,9 +31,9 @@ public class TUGrazPersonServiceImpl implements PersonService {
     // not have permission to access it, this will throw. So we try again without
     // fetching locals.
     try {
-      contributor = tuGrazPersonRestService.read(id, List.of("email"));
+      contributor = tuGrazPersonRestService.read(id, String.join(",", List.of("email")));
     } catch (Exception e) {
-      contributor = tuGrazPersonRestService.read(id, List.of());
+      contributor = tuGrazPersonRestService.read(id, null);
     }
 
     return TUGrazPersonDOMapper.mapEntityToDO(contributor, new ContributorDO());
@@ -53,11 +53,11 @@ public class TUGrazPersonServiceImpl implements PersonService {
               s.getQuery(),
               s.getPagination().getPage(),
               s.getPagination().getPerPage(),
-              List.of("email"));
+              String.join(",", List.of("email")));
     } catch (Exception e) {
       tuGrazPeopleSearch =
           tuGrazPersonRestService.search(
-              s.getQuery(), s.getPagination().getPage(), s.getPagination().getPerPage(), List.of());
+              s.getQuery(), s.getPagination().getPage(), s.getPagination().getPerPage(), null);
     }
 
     List<ContributorDO> contributors =
