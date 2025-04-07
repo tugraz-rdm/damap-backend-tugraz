@@ -101,6 +101,7 @@ rest:
     repositories/mp-rest/url: https://www.re3data.org/api/v1/repositories
     repository/mp-rest/url: https://www.re3data.org/api/v1/repository
     repositories/mp-rest/scope: jakarta.inject.Singleton
+    repository/mp-rest/scope: jakarta.inject.Singleton
   openaire/mp-rest/url: http://api.openaire.eu/search/
   orcid:
     search/mp-rest/url: https://pub.orcid.org

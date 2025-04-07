@@ -1,6 +1,7 @@
 databaseChangeLog:
   - changeSet:
       id: "at/tugraz/damap/fixDmpTitles"
+      author: Laura Thaci
       changes:
         - sql:
             sql: |
