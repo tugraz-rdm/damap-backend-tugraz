@@ -4,4 +4,6 @@ databaseChangeLog:
   - include:
       file: at/tugraz/damap/db/addInstitutionalStorage.yaml # insert TU Graz specific storage
   - include:
-      file: at/tugraz/damap/db/fixDmpTitles.yaml 
+      file: at/tugraz/damap/db/fixDmpTitles.yaml
+  - include:
+      file: at/tugraz/damap/db/addContributorRole.yaml

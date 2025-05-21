@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: "at/tugraz/damap/addContributorRole"
+      author: Laura Thaci
+      changes:
+        - addColumn:
+            tableName: contributor
+            columns:
+              - column:
+                  name: contributor_role
+                  type: varchar(255)
+                  defaultValue: "CONTRIBUTOR"
+                  constraints:
+                    nullable: true 
