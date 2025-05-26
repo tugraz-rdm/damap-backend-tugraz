@@ -19,7 +19,7 @@ damap:
     db-kind: postgresql # your database
   repositories:
     # TU Graz repository
-    recommendation: ["r3d100013565", "r3d100010468"]
+    recommendation: ${DAMAP_REPOSITORIES_RECOMMENDATION}
   projects-url: https://api.tugraz.at/base/research-projects
   persons-url: https://api.tugraz.at/base/people
   fits-url: http://fits-service:8080/fits
@@ -98,8 +98,8 @@ rest:
   persons/mp-rest/url: ${damap.persons-url}
   fits/mp-rest/url: ${damap.fits-url}
   r3data:
-    repositories/mp-rest/url: https://www.re3data.org/api
-    repository/mp-rest/url: https://www.re3data.org/api
+    repositories/mp-rest/url: ${DAMAP_R3DATA_REPOSITORIES_MP_REST_URL}
+    repository/mp-rest/url: ${DAMAP_R3DATA_REPOSITORY_MP_REST_URL}
     repositories/mp-rest/scope: jakarta.inject.Singleton
     repository/mp-rest/scope: jakarta.inject.Singleton
   openaire/mp-rest/url: http://api.openaire.eu/search/
