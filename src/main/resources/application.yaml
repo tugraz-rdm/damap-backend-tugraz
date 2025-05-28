@@ -19,7 +19,7 @@ damap:
     db-kind: postgresql # your database
   repositories:
     # TU Graz repository
-    recommendation: ["r3d100013565", "r3d100010468", "r3d100011146"]
+    recommendation: ["r3d100013565", "r3d100010468"]
   projects-url: https://api.tugraz.at/base/research-projects
   persons-url: https://api.tugraz.at/base/people
   fits-url: http://fits-service:8080/fits
