@@ -24,6 +24,7 @@ damap:
   persons-url: https://api.tugraz.at/base/people
   fits-url: http://fits-service:8080/fits
   gotenberg-url: ${DAMAP_GOTENBERG_URL}
+  re3data-url: ${DAMAP_RE3DATA_URL:https://www.re3data.org/api}
   person-services:
     - display-text: "University"
       query-value: "UNIVERSITY"
@@ -78,9 +79,11 @@ quarkus:
   cache:
     caffeine:
       "repositories":
-        expire-after-write: P1D
+        enabled: ${DAMAP_CACHE_REPOSITORIES_ENABLED:false}
+        expire-after-write: ${DAMAP_CACHE_EXPIRE_AFTER_WRITE:P1D}
       "repository":
-        expire-after-write: P1D
+        enabled: ${DAMAP_CACHE_REPOSITORY_ENABLED:false}
+        expire-after-write: ${DAMAP_CACHE_EXPIRE_AFTER_WRITE:P1D}
 
   liquibase:
     migrate-at-start: true
@@ -98,8 +101,8 @@ rest:
   persons/mp-rest/url: ${damap.persons-url}
   fits/mp-rest/url: ${damap.fits-url}
   r3data:
-    repositories/mp-rest/url: https://www.re3data.org/api/v1/repositories
-    repository/mp-rest/url: https://www.re3data.org/api/v1/repository
+    repositories/mp-rest/url: ${damap.re3data-url}
+    repository/mp-rest/url: ${damap.re3data-url}
     repositories/mp-rest/scope: jakarta.inject.Singleton
     repository/mp-rest/scope: jakarta.inject.Singleton
   openaire/mp-rest/url: http://api.openaire.eu/search/
